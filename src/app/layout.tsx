@@ -9,7 +9,7 @@ export default function RootLayout({
     <html lang="en">
       <head />
       <body>
-        <div className="header">PARKING MANAGER</div>
+        <div className="header">PARKING MANAGER SEVEN</div>
         {children}
       </body>
     </html>
