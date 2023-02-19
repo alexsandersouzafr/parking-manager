@@ -1,19 +1,38 @@
-export default function WithdrawForm() {
+import { Spot } from "@/contexts/ParkingContext";
+import { Action } from "@/reducers/ParkingReducer";
+import { Dispatch } from "react";
+
+type Props = {
+  state: Spot[];
+  close: () => void;
+  dispatch: Dispatch<Action>;
+  id: number;
+};
+
+export default function WithdrawForm({ close, dispatch, id, state }: Props) {
   return (
-    <div className="entry-form">
-      <div className="grid-gap">
-        <div>
-          vaga:
-          <select>
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
-          </select>
+    <>
+      <div className="modal-background"></div>
+      <div className="form">
+        Liberar vaga {id}?
+        <div
+          className="yellow-button"
+          onClick={() => {
+            dispatch({ type: "withdraw", payload: { ...state[id - 1] } });
+            close();
+          }}
+        >
+          LIBERAR
+        </div>
+        <div
+          className="yellow-button"
+          onClick={() => {
+            close();
+          }}
+        >
+          CANCELAR
         </div>
       </div>
-
-      <div className="yellow-button">DAR SAÍDA</div>
-    </div>
+    </>
   );
 }

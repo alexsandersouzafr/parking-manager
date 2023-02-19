@@ -1,8 +1,12 @@
+import { useContext } from "react";
 import BoardStatus from "./BoardStatus";
 import History from "./History";
 import ItemCard from "./ItemCard";
+import { ParkingContext } from "@/contexts/ParkingContext";
 
 export default function Board() {
+  const { park } = useContext(ParkingContext);
+
   return (
     <div className="board">
       <BoardStatus />
@@ -10,69 +14,15 @@ export default function Board() {
         QUADRO DE VAGAS <History />
       </div>
       <div className="board-body">
-        <ItemCard number={1} className="free" />
-        <ItemCard number={2} className="free" />
-        <ItemCard
-          number={3}
-          plate="ABC-1234"
-          time="12:24"
-          className="occupied"
-        />
-        <ItemCard
-          number={5}
-          plate="ABC-1234"
-          time="12:24"
-          className="occupied"
-        />
-        <ItemCard number={4} className="free" />
-        <ItemCard
-          number={6}
-          plate="ABC-1234"
-          time="12:24"
-          className="occupied"
-        />
-        <ItemCard number={1} className="free" />
-        <ItemCard number={2} className="free" />
-        <ItemCard
-          number={3}
-          plate="ABC-1234"
-          time="12:24"
-          className="occupied"
-        />
-        <ItemCard
-          number={5}
-          plate="ABC-1234"
-          time="12:24"
-          className="occupied"
-        />
-        <ItemCard number={4} className="free" />
-        <ItemCard
-          number={6}
-          plate="ABC-1234"
-          time="12:24"
-          className="occupied"
-        />
-        <ItemCard number={1} className="free" />
-        <ItemCard number={2} className="free" />
-        <ItemCard
-          number={3}
-          plate="ABC-1234"
-          time="12:24"
-          className="occupied"
-        />
-        <ItemCard
-          number={5}
-          plate="ABC-1234"
-          time="12:24"
-          className="occupied"
-        />
-        <ItemCard number={4} className="free" />
-        <ItemCard
-          number={6}
-          plate="ABC-1234"
-          time="12:24"
-          className="occupied"
-        />
+        {park.map((parkingSpace) => (
+          <ItemCard
+            key={parkingSpace.id}
+            id={parkingSpace.id}
+            plate={parkingSpace.plate}
+            status={parkingSpace.status}
+            time={parkingSpace.time}
+          />
+        ))}
       </div>
     </div>
   );

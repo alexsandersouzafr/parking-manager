@@ -5,6 +5,12 @@ body {
   margin: 0;
 }
 
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .header {
   text-align: center;
   font-weight: 900;
@@ -20,6 +26,7 @@ body {
   border-radius: 1rem;
   margin: 1rem;
   box-shadow: black;
+  max-width: 36rem;
 }
 
 .board-header {
@@ -51,6 +58,7 @@ body {
   width: 8rem;
   box-shadow: 0px 4px 10px rgb(227, 227, 227);
   font-size: 1rem;
+  cursor: pointer;
 }
 
 .free {
@@ -89,29 +97,42 @@ body {
   padding: 0.8rem;
   font-weight: bold;
   text-align: center;
+  cursor: pointer;
 }
 
-.action-button {
-  width: 8rem;
-}
-
-.flex-center {
+.flex-right {
   display: flex;
-  justify-content: center;
+  justify-content: right;
   gap: 0.5rem;
 }
 
-.entry-form {
+.form {
+  position: absolute;
+  top: 30vh;
   width: 20rem;
   margin: auto;
-  display: grid;
+  display: flex;
+  flex-direction: column;
   gap: 0.5rem;
   justify-content: center;
-  padding: 1rem;
+  padding: 2rem;
   background: #80a871;
   color: #ffffff;
   font-weight: bold;
   border-radius: 0.5rem;
+  z-index: 10;
+  box-shadow: 0px 4px 10px rgb(35, 62, 40);
+}
+
+.modal-background {
+  z-index: 0;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  background: #032604;
+  opacity: 70%;
 }
 
 .grid-gap {
@@ -119,10 +140,12 @@ body {
   gap: 0.5rem;
 }
 
-input,
-select {
+.spot-number {
+  color: #032604;
+}
+input {
+  width: 18rem;
   border-radius: 0.5rem;
   border-style: none;
   padding: 1rem;
-  margin-inline: 1rem;
 }

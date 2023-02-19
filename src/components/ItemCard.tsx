@@ -1,16 +1,45 @@
+import { ParkingContext } from "@/contexts/ParkingContext";
+import { useContext, useState } from "react";
+import EntryForm from "./EntryForm";
+import WithdrawForm from "./WithdrawForm";
+
 type Props = {
-  number: number;
-  className: string;
+  id: number;
   plate?: string;
   time?: string;
+  status: "free" | "occupied";
 };
 
-export default function ItemCard({ className, number, plate, time }: Props) {
+export default function ItemCard({ status, id, plate, time }: Props) {
+  const { park, dispatch } = useContext(ParkingContext);
+  const [showModal, setShowModal] = useState(false);
+  const displayModal =
+    status === "free" ? (
+      <EntryForm
+        close={() => setShowModal(false)}
+        dispatch={(action) => dispatch(action)}
+        id={id}
+      />
+    ) : (
+      <WithdrawForm
+        state={park}
+        close={() => setShowModal(false)}
+        dispatch={(action) => dispatch(action)}
+        id={id}
+      />
+    );
+
   return (
-    <div className={`item-card ${className}`}>
-      <div className="item-number">{number}</div>
-      <div>{plate}</div>
-      <div>{time}</div>
-    </div>
+    <>
+      <div
+        onClick={() => setShowModal(!showModal)}
+        className={`item-card ${status}`}
+      >
+        <div className="item-number">{id}</div>
+        <div>{plate}</div>
+        <div>{time}</div>
+      </div>
+      {showModal ? displayModal : null}
+    </>
   );
 }

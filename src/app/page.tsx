@@ -1,18 +1,16 @@
-import ActionButton from "@/components/ActionButton";
+"use client";
+
 import Board from "@/components/Board";
 import EntryForm from "@/components/EntryForm";
 import WithdrawForm from "@/components/WithdrawForm";
+import ParkingContextProvider from "@/contexts/ParkingContext";
 
 export default function Home() {
   return (
-    <main>
-      <Board />
-      <div className="flex-center">
-        <ActionButton text="ENTRADA" />
-        <ActionButton text="SAÍDA" />
+    <ParkingContextProvider>
+      <div className="container">
+        <Board />
       </div>
-      <EntryForm />
-      <WithdrawForm />
-    </main>
+    </ParkingContextProvider>
   );
 }
