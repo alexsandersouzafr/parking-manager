@@ -1,5 +1,6 @@
+import { HistoryContext } from "@/contexts/HistoryContext";
 import { Action } from "@/reducers/ParkingReducer";
-import { Dispatch, useState } from "react";
+import { Dispatch, useContext, useState } from "react";
 
 type Props = {
   close: () => void;
@@ -10,11 +11,12 @@ type Props = {
 export default function EntryForm({ close, dispatch, id }: Props) {
   const [name, setName] = useState("");
   const [plate, setPlate] = useState("");
+  const { history, addHistoryEntry } = useContext(HistoryContext);
 
   return (
     <>
       <div className="modal-background"></div>
-      <div className="form">
+      <div className="modal">
         <div className="grid-gap spot-number">
           Preencher a vaga {id}?
           <div>
@@ -48,6 +50,13 @@ export default function EntryForm({ close, dispatch, id }: Props) {
                       status: "occupied",
                       time: new Date().toLocaleTimeString(),
                     },
+                  }),
+                  addHistoryEntry({
+                    id: id,
+                    name: name,
+                    plate: plate,
+                    action: "entrada",
+                    time: new Date().toLocaleTimeString(),
                   }),
                   close())
                 : null;

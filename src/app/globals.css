@@ -105,7 +105,12 @@ body {
   gap: 0.5rem;
 }
 
-.form {
+.flex-left {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.modal {
   position: absolute;
   top: 30vh;
   width: 20rem;
@@ -147,4 +152,9 @@ input {
   border-radius: 0.5rem;
   border-style: none;
   padding: 1rem;
+}
+
+td {
+  text-align: left;
+  padding: 0.5rem;
 }

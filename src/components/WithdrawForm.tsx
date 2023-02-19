@@ -1,6 +1,7 @@
+import { HistoryContext, HistoryEntry } from "@/contexts/HistoryContext";
 import { Spot } from "@/contexts/ParkingContext";
 import { Action } from "@/reducers/ParkingReducer";
-import { Dispatch } from "react";
+import { Dispatch, useContext } from "react";
 
 type Props = {
   state: Spot[];
@@ -10,15 +11,26 @@ type Props = {
 };
 
 export default function WithdrawForm({ close, dispatch, id, state }: Props) {
+  const { history, addHistoryEntry } = useContext(HistoryContext);
+  const spot = state[id - 1];
+
   return (
     <>
       <div className="modal-background"></div>
-      <div className="form">
+      <div className="modal">
         Liberar vaga {id}?
         <div
           className="yellow-button"
           onClick={() => {
-            dispatch({ type: "withdraw", payload: { ...state[id - 1] } });
+            dispatch({ type: "withdraw", payload: { ...spot } });
+            addHistoryEntry({
+              id: spot.id,
+              name: spot.name,
+              plate: spot.plate,
+              action: "saída",
+              time: new Date().toLocaleTimeString(),
+            });
+
             close();
           }}
         >
