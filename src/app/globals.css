@@ -83,9 +83,8 @@ body {
   border-radius: 0.2rem;
 }
 
-.status {
+.help {
   display: flex;
-  justify-content: center;
   gap: 0.5rem;
   padding-bottom: 1rem;
 }
