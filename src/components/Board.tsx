@@ -11,7 +11,7 @@ export default function Board() {
 
   return (
     <>
-      <div className="board">
+      <div data-testid="Board" className="board">
         <div className="board-header flex">
           {showHistory ? <span>HISTÓRICO</span> : <span>QUADRO DE VAGAS</span>}
           <div
@@ -22,7 +22,7 @@ export default function Board() {
           </div>
         </div>
         <HistoryContextProvider>
-          <div className="board-body">
+          <div data-testid="board-body" className="board-body">
             {showHistory ? (
               <History />
             ) : (
